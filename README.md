@@ -145,7 +145,7 @@ Also found in "queries/03_revenue_by_year.sql"
 - YEAR() gets the year from the timestamp. This is similar to strftime() in SQLite.
 - SUM() gets the total revenue for each year as signified by the GROUP BY.
 - LAG() uses a previous row from the same query without having to use a self-join. In this case it made it easy to find the year over year differences by keeping it clean and only using one line. You need the OVER function for it to work. This specifies the order of the rows that it will be joining on. This allows LAG to go over those previous rows in the same way the previous aggregate function did so that it is using the same data to compute the result.
-- GROUP BY() gets all the totals for each year and allows SUM to combine them.
+- GROUP BY gets all the totals for each year and allows SUM to combine them.
 - ORDER BY the year descending from 2025...2021.
 - No Need to Limit since the database only goes back five years. If it went back say 20, we might want to limit.
 
