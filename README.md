@@ -26,7 +26,7 @@ The Chinook database is a public sample database that models a digital music sto
 # Query 1: Recent Invoices
 What are the most recent invoices from representative Jane Peacock?
 
-## SQL
+### SQL
 See queries/01_recent_invoices.sql
 
 ## Output
@@ -41,7 +41,7 @@ See queries/01_recent_invoices.sql
 - InvoiceDate contains 00:00:00 after the date, however I removed this for readability.
 - Total Rows: 28
 
-# Explanation
+## Explanation
 This query:
 - JOIN Invoices to Customers Table, and Customers to Employees.
 - CONCAT combines first and last name. Similar to using the || operator.
@@ -55,7 +55,7 @@ This query show us what Invoices Jane Peacock has done since her hiring. First I
 # Query 2: City Revenue
 Which cities have gotten the most revenue in 2025?
 
-## SQL
+### SQL
 See queries/02_city_revenue.sql
 
 ## Ouput
@@ -81,7 +81,7 @@ This query gives us the top 5 cities for the most revenue generated in 2025. Thi
 
 # Query 3: Revenue Over Time
 
-## SQL
+### SQL
 See queries/03_Revenue_By_Year
 
 ## Output
