@@ -82,7 +82,7 @@ This query gives us the top 5 cities for the most revenue generated in 2025. Thi
 # Query 3: Revenue Over Time
 
 ### SQL
-See queries/03_Revenue_By_Year
+See queries/03_revenue_by_year
 
 ## Output
 | Year | TotalRevenue | RevenueDiff |
