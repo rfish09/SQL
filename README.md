@@ -27,7 +27,26 @@ The Chinook database is a public sample database that models a digital music sto
 What are the most recent invoices from representative Jane Peacock?
 
 ### SQL
-See queries/01_recent_invoices.sql
+```sql
+SELECT
+  I.InvoiceId AS 'InvoiceId',
+  I.InvoiceDate AS 'InvoiceDate',
+  CONCAT(C.FirstName, ' ', C.LastName) AS 'CustomerName',
+    C.Company AS 'CustomerCompany',
+  CONCAT(E.FirstName, ' ', E.LastName) AS 'CustomerEmployeeRepName'
+FROM
+  Invoice AS I
+JOIN Customer AS C
+ON I.CustomerId = C.CustomerId
+JOIN Employee AS E
+ON C.SupportRepId = E.EmployeeId
+WHERE
+   C.Company IS NOT NULL
+ORDER BY
+  I.InvoiceId DESC
+LIMIT 5
+```
+also found in "queries/01_recent_invoices.sql".
 
 ## Output
 | InvoiceId | InvoiceDate | CustomerName | CustomerCompany | EmployeeRepName |
@@ -56,7 +75,22 @@ This query show us what Invoices Jane Peacock has done since her hiring. First I
 Which cities have gotten the most revenue in 2025?
 
 ### SQL
-See queries/02_city_revenue.sql
+```sql
+SELECT
+  I.BillingCity AS 'City',
+  SUM(I.TOTAL) AS 'Revenue_2025'
+FROM
+  Invoice AS I
+WHERE
+  I.InvoiceDate LIKE '%2025%'
+GROUP BY
+  I.BillingCity
+ORDER BY
+  SUM(I.Total) DESC
+LIMIT 5
+```
+
+Also found in "queries/02_city_revenue.sql"
 
 ## Ouput
 | City | Revenue_2025 |
@@ -82,7 +116,19 @@ This query gives us the top 5 cities for the most revenue generated in 2025. Thi
 # Query 3: Revenue Over Time
 
 ### SQL
-See queries/03_revenue_by_year
+```sql
+SELECT
+  YEAR(I.InvoiceDate) AS 'Year',
+  SUM(I.Total) AS TotalRevenue,
+  SUM(I.Total) - LAG(SUM(I.Total)) OVER (ORDER BY YEAR(I.InvoiceDate)) AS RevenueDiff
+FROM
+  Invoice AS I
+GROUP BY 
+  YEAR(I.InvoiceDate)
+ORDER BY
+  YEAR(I.InvoiceDate) DESC
+```
+Also found in "queries/03_revenue_by_year.sql"
 
 ## Output
 | Year | TotalRevenue | RevenueDiff |
